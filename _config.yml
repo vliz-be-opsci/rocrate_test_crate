@@ -2,7 +2,8 @@
 
 title: "Jekyll Actions Demo" 
 theme: minima
-baseurl: https://vliz-be-opsci.github.io/rocrate_test_crate/
+url: https://vliz-be-opsci.github.io
+baseurl: /rocrate_test_crate
 
 # remote_theme: pages-themes/midnight@v0.2.0
 # plugins:
