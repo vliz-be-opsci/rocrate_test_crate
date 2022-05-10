@@ -1,6 +1,6 @@
 # _config.yml
 
-title: "Jekyll Actions Demo" 
+title: "Ocean Sampling Day" 
 theme: minima
 url: https://vliz-be-opsci.github.io
 baseurl: /rocrate_test_crate
