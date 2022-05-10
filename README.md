@@ -1,4 +1,3 @@
-[![RoCrate to GitHub Pages](https://github.com/vliz-be-opsci/rocrate_test_crate/actions/workflows/rocrate2pages.yml/badge.svg)](https://github.com/vliz-be-opsci/rocrate_test_crate/actions/workflows/rocrate2pages.yml)
+# Ocean Sampling Day 2019 space
 
-# my_bon_test_crate_2
-the second test crate for testing out features of recicproce usage of repos 
+This repository contains the files for Ocean Sampling Day 2019. The metadata record for this event is published in the IMIS datasets catalogue: [OSD2019-record](https://www.vliz.be/en/imis?module=dataset&dasid=7917). The same data can be obtained as a direct download from that IMIS record, but a more annotated set of data (in particular the machine/developer-readable versions) are provided here.
