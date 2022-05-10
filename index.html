@@ -10,7 +10,8 @@ title: OSD 2019
   <header>
     <h1>{{ page.title }}</h1>
 
-    {% capture my_include %}{% include_relative ./README.md %}{% endcapture %}
+    {% capture my_include %}{% include_relative README.md %}{% endcapture %}
+    {% include_relative file.ext param='value' param2='value' %}
     {{ my_include | markdownify }} 
 
   </header>
@@ -18,7 +19,7 @@ title: OSD 2019
     
     <section>
 
-      {% include_relative ./ro-crate-preview.html %}
+      {% include_relative ro-crate-preview.html %}
 
     </section>
  
