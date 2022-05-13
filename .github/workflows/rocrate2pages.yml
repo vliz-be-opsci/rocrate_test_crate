@@ -10,10 +10,7 @@ jobs:
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
     steps:
-      - uses: actions/checkout@v2
-        with:
-          submodules: true  # Fetch Hugo themes (true OR recursive)
-          fetch-depth: 0    # Fetch all history for .GitInfo and .Lastmod
+      - uses: actions/checkout@v3 
           
       - name: Setup Python
         uses: actions/setup-python@v3
@@ -25,6 +22,16 @@ jobs:
         shell: bash
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
+      
+      - name: Get Shared Theme
+        uses: actions/checkout@v3
+        with:
+          repository: ocean-sampling-day/pages-theme
+          path: pages-theme
+      
+      - name: What is here? 
+        run:   ls -lah
+        shell: bash
 
       - name: Build Pages
         uses: vliz-be-opsci/rocrate-to-pages@v0.1.0
