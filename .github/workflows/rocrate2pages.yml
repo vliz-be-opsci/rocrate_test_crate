@@ -44,7 +44,7 @@ jobs:
 
       # Move template files into root dir
       - name: Move template
-        run:   mv -r ./pages-theme/* .
+        run:   mv  pages-theme/* .
         shell: bash
 
       # Cache jekyll install to speed up builds
