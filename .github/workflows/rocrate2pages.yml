@@ -12,38 +12,42 @@ jobs:
     steps:
       # Checkout this repo
       - uses: actions/checkout@v3 
-          
+      
+      # Setup python for this build
       - name: Setup Python
         uses: actions/setup-python@v3
         with: 
           python-version: '3.10'
 
+      # Show what the context is of this action. 
+      #   Good for troubleshooting
       - name: Dump github context
         run:   echo "$GITHUB_CONTEXT"
         shell: bash
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
       
-      - name: Build Pages
+      # Build the preview.html file from the rocrate.json
+      - name: Build Preview HTML
         uses: vliz-be-opsci/rocrate-to-pages@v0.1.0
         with:
           crate_path: .
           loglevel: DEBUG
 
+      # Get a shared theme from a repo and put it
+      # into /pages-theme/ folder
       - name: Get Shared Theme
         uses: actions/checkout@v3
         with:
           repository: ocean-sampling-day/pages-theme 
           path: pages-theme
 
-      - name: where?
-        run:   ls -lah
+      # Move template files into root dir
+      - name: Move template
+        run:   mv -r ./pages-theme/* .
         shell: bash
 
-      - name: Move built files into theme template
-        run:   mv -t pages-theme README.md ro-crate-preview.html
-        shell: bash
-
+      # Cache jekyll install to speed up builds
       - name: Cache Action
         uses: actions/cache@v3
         with:
@@ -52,16 +56,10 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gems-
       
-      - name: Jekyll Build            
+      # Build and deploy to GH-pages
+      - name: Jekyll Build and Deploy  
         uses: helaili/jekyll-action@2.3.1     
         with:                                 
           token: ${{ secrets.GITHUB_TOKEN }}
-          jekyll_src: pages-theme 
-
-      # - name: Deploy
-      #   uses: peaceiris/actions-gh-pages@v3
-      #   if: ${{ github.ref == 'refs/heads/main' }}
-      #   with:
-      #     github_token: ${{ secrets.GITHUB_TOKEN }}
-      #     publish_dir: .
-          
+          jekyll_src: .
+ 
