@@ -10,6 +10,7 @@ jobs:
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
     steps:
+      # Checkout this repo
       - uses: actions/checkout@v3 
           
       - name: Setup Python
@@ -23,16 +24,16 @@ jobs:
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
       
-      - name: Get Shared Theme
-        uses: actions/checkout@v3
-        with:
-          repository: ocean-sampling-day/pages-theme 
-
       - name: Build Pages
         uses: vliz-be-opsci/rocrate-to-pages@v0.1.0
         with:
           crate_path: .
           loglevel: DEBUG
+
+      - name: Get Shared Theme
+        uses: actions/checkout@v3
+        with:
+          repository: ocean-sampling-day/pages-theme 
 
       - name: Move built files into theme template
         run:   mv -t pages-theme README.md ro-crate-preview.html
@@ -47,8 +48,8 @@ jobs:
             ${{ runner.os }}-gems-
       
       - name: Jekyll Build            
-        uses: helaili/jekyll-action@2.3.1    # Choose any one of the Jekyll Actions
-        with:                                # Some relative inputs of your action
+        uses: helaili/jekyll-action@2.3.1     
+        with:                                 
           token: ${{ secrets.GITHUB_TOKEN }}
           jekyll_src: pages-theme 
 
